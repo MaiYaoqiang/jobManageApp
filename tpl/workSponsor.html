@@ -1,0 +1,47 @@
+
+<div class="list ">
+  <a ng-repeat="item in workSponsoreData[0]" class="item">
+    <div class="fr"><img class="my_photo" src="img/1.jpg" alt=""/></div>
+    <h2><b>{{item.wTitle}}</b></h2>
+    <h3 class="icon_tips">
+      <i class="icon ion-ios-timer-outline">{{item.deadLine|date:'yyyy-MM-dd'}}</i>
+      <i class="icon ion-ios-filing-outline">{{item.pName}}</i>
+    </h3>
+  </a>
+</div>
+
+
+<!--可隐藏的已完成任务-->
+<div class="list ">
+
+  <a ng-click="listToggle()" data-toggle="finish" class="item item-divider-my">
+    <b>{{txtToggle.txt}}</b>
+    <i ng-class="{true:'ion-ios-arrow-up ',false:'ion-ios-arrow-down'}[iconToggle.state]" class="fr"></i>
+  </a>
+  <div id="finish" ng-class="{true:'',false:'fade'}[iconToggle.state]" class="list in">
+    <a ng-repeat="item in workSponsoreData[1]" class="item">
+      <div class="fr"><img class="my_photo" src="img/1.jpg" alt=""/></div>
+      <h2><b>{{item.wTitle}}</b></h2>
+      <h3 class="icon_tips">
+        <span>{{item.completeTime|afterHour}}小时前完成</span>
+      </h3>
+    </a>
+
+    <!--<a href="" class="item">-->
+
+      <!--<div class="fr"><img class="my_photo" src="img/1.jpg" alt=""/></div>-->
+      <!--<h2><b>沟通交流</b></h2>-->
+      <!--<h3 class="icon_tips">-->
+        <!--<span>2小时前 完成</span>-->
+      <!--</h3>-->
+
+
+    <!--</a>-->
+  </div>
+
+
+
+
+
+
+</div>

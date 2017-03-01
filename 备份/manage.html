@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="manage">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <link rel="stylesheet" href="css/ionic.css"/>
+  <link rel="stylesheet" href="css/manage.css"/>
+  <script src="js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="parentCtrl">
+
+
+<!--状态存放的位置-->
+<div ui-view></div>
+
+
+<!--引入尾部-->
+<div ng-include="'tpl/include/footer.html'"></div>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/manage.js"></script>
+
+</body>
+</html>

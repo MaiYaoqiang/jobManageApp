@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <link rel="stylesheet" href="css/ionic.css"/>
+  <script src="js/ionic.bundle.js"></script>
+
+</head>
+<body>
+<script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">My Modal title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+      <button ng-click="closeModal()">关闭模态框</button>
+
+      <button ng-click="">remove</button>
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+<ion-header-bar ng-controller="MyCtrl">
+  <h1 class="title">header</h1>
+  <button ng-click="showPopup()">打开模态框</button>
+</ion-header-bar>
+
+<ion-content>
+  <p>Hello </p>
+
+
+</ion-content>
+
+<ion-footer-bar>
+  <h1 class="title">footer</h1>
+</ion-footer-bar>
+
+<script>
+  angular.module('testApp', ['ionic'])
+  .controller('MyCtrl',function($scope, $ionicPopup, $timeout) {
+
+      // Triggered on a button click, or some other target
+      $scope.showPopup = function () {
+        $scope.data = {};
+
+        // An elaborate, custom popup
+        var myPopup = $ionicPopup.show({
+          template: '<input type="password" ng-model="data.wifi">',
+          title: 'Enter Wi-Fi Password',
+          subTitle: 'Please use normal things',
+          scope: $scope,
+          buttons: [
+            {text: 'Cancel'},
+            {
+              text: '<b>Save</b>',
+              type: 'button-positive',
+              onTap: function (e) {
+                if (!$scope.data.wifi) {
+                  //don't allow the user to close unless he enters wifi password
+                  e.preventDefault();
+                } else {
+                  return $scope.data.wifi;
+                }
+              }
+            }
+          ]
+        });
+
+        myPopup.then(function (res) {
+          console.log('Tapped!', res);
+        });
+
+        $timeout(function () {
+          myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 3000);
+      };
+    });
+</script>
+</body>
+</html>
+
+
+
+
+

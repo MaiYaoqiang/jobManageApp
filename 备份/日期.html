@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <link rel="stylesheet" href="css/ionic.css"/>
+  <script src="js/ionic.bundle.js"></script>
+  <script src="js/lib/ionic-datepicker-master/dist/ionic-datepicker.bundle.min.js"></script>
+</head>
+<body  ng-controller="myCtrl">
+<ion-header-bar>
+  <h1 class="title">header</h1>
+</ion-header-bar>
+
+<ion-content>
+  <p>Hello </p>
+
+  <ionic-datepicker input-obj="datepickerObjectEnd">
+    <button class="button button-block button-positive"> {{datepickerObjectEnd.inputDate | date:datepickerObjectEnd.dateFormat}}</button>
+  </ionic-datepicker>
+</ion-content>
+
+<ion-footer-bar>
+  <h1 class="title">footer</h1>
+</ion-footer-bar>
+
+<script>
+  var app = angular.module('myApp', ['ionic','ionic-datepicker']);
+
+  app.config(function (ionicDatePickerProvider) {
+    var datePickerObj = {
+      inputDate: new Date(),
+      titleLabel: 'Select a Date',
+      setLabel: 'Set',
+      todayLabel: 'Today',
+      closeLabel: 'Close',
+      mondayFirst: false,
+      weeksList: ["S", "M", "T", "W", "T", "F", "S"],
+      monthsList: ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
+      templateType: 'popup',
+      from: new Date(2012, 8, 1),
+      to: new Date(2018, 8, 1),
+      showTodayButton: true,
+      dateFormat: 'dd MMMM yyyy',
+      closeOnSelect: false,
+      disableWeekdays: []
+    };
+    ionicDatePickerProvider.configDatePicker(datePickerObj);
+  });
+  var disabledDates = [
+    new Date(1437719836326),
+    new Date(),
+    new Date(2016, 7, 10), //Months are 0-based, this is August, 10th.
+    new Date('Wednesday, August 12, 2015'), //Works with any valid Date formats like long format
+    new Date("08-14-2016"), //Short format
+    new Date(1439676000000) //UNIX format
+  ];
+  app.controller('myCtrl',['$scope','ionicDatePicker',
+    function($scope,ionicDatePicker){
+      var ipObj1 = {
+        callback: function (val) {  //Mandatory
+          console.log('Return value from the datepicker popup is : ' + val, new Date(val));
+        },
+        disabledDates: [            //Optional
+          new Date(2016, 2, 16),
+          new Date(2015, 3, 16),
+          new Date(2015, 4, 16),
+          new Date(2015, 5, 16),
+          new Date('Wednesday, August 12, 2015'),
+          new Date("08-16-2016"),
+          new Date(1439676000000)
+        ],
+        from: new Date(2012, 1, 1), //Optional
+        to: new Date(2016, 10, 30), //Optional
+        inputDate: new Date(),      //Optional
+        mondayFirst: true,          //Optional
+        disableWeekdays: [0],       //Optional
+        closeOnSelect: false,       //Optional
+        templateType: 'popup'       //Optional
+      };
+
+      $scope.openDatePicker = function(){
+        ionicDatePicker.openDatePicker(ipObj1);
+      };
+
+
+  }])
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+
+<div class="list ">
+  <a ng-repeat="item in workAttentionData" href="" class="item">
+    <div class="fr"><img class="my_photo" src="img/1.jpg" alt=""/></div>
+    <h2><b>{{item.wTitle}}</b></h2>
+    <h3 class="icon_tips">
+      <i class="icon ion-ios-timer-outline">{{item.deadLine | date:'yyyy-MM-dd'}}</i>
+      <i class="icon ion-ios-filing-outline">{{item.pName}}项目</i>
+    </h3>
+  </a>
+</div>
+

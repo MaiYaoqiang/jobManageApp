@@ -1,0 +1,157 @@
+.img-responsive{
+  display:block;
+  max-width:100%;
+  height:auto;
+}
+.fr{
+  float:right;
+}
+.fl{
+  float:left;
+}
+.color_fff{
+  color:#fff;
+}
+.border_fff{
+  border-color:#fff;
+}
+.color_a2a2a2{
+  color:#a2a2a2;
+}
+ion-content{
+  background-color: #F8F8F8;
+}
+.item-divider-my{
+  padding:10px 16px;
+  font-size: 14px;
+}
+/*头部header*/
+.header_border{
+  border-left: 1px solid #85E8D4;
+}
+.header_circle{
+  width:28px;
+  height:28px;
+  border:1px solid #fff;
+  border-radius: 50%;
+  font-size:20px;
+  line-height: 26px;
+}
+.bg_color{
+  background-color:#5ACBB9;
+}
+/*work导航条*/
+.mybar_color .button {
+  border-color: #5ACBB9;
+  background-color: #fff;
+  color: #aaa; }
+.mybar_color .button:hover {
+  color:#fff;
+  border-color: #5ACBB9;
+  background-color: #5ACBB9;
+  text-decoration: none; }
+.mybar_color .button.active, .mybar_color .button.activated {
+  border-color: #5ACBB9;
+  background-color: #5ACBB9;
+color:#fff;}
+.mybar_color .button.button-clear {
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+  color: #fff;
+  font-size: 17px; }
+.mybar_color .button.button-icon {
+  border-color: transparent;
+  background: none;
+}
+.button.title_bar{
+  min-height:32px;
+  font-size: 14px;
+  line-height:32px;
+}
+
+
+/*work 分页里内容*/
+h3.icon_tips{
+  margin-top:10px;
+
+}
+.icon_tips i{
+  margin-right:20px;
+
+}
+
+.icon_tips i:before{
+  margin-right:5px;
+  font-size: 16px;
+}
+
+.my_photo{
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+}
+
+/*workSponsor页面*/
+
+.in{
+  overflow: hidden;
+  opacity: 1;
+  height:100%;
+  transition:all 0.3s linear;
+}
+.fade{
+  height:0;
+  opacity: 0;
+}
+
+/*project项目页面*/
+.project_list .item i{
+  font-size: 24px;
+  margin-right: 10px;
+}
+.project_list .item span{
+  vertical-align:middle;
+}
+
+/*active页面*/
+.active_header{
+  padding:10px;
+}
+.active_header span{
+  padding:5px 35px;
+  border-radius: 30px;
+  background-color:#5ACBB9;
+  color:#fff;
+}
+.active_header_line{
+  position:relative;
+}
+.active_header_line .line{
+  border:1px solid #ddd;
+}
+.active_header_line .active_name{
+  position: absolute;
+  right:0px;
+  top:-9px;
+  background: #fff;
+  padding:0 10px;
+}
+.active_item{
+  margin-top:10px;
+}
+.active_item img{
+  width:40px;
+  height:40px;
+}
+.main_contain .main_top span{
+  font-size: 10px;
+}
+.main_contain .main_bottom{
+  padding:12px;
+  background: #F8F8F8;
+}
+
+
+
+

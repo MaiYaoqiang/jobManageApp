@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html ng-app="manage">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <link rel="stylesheet" href="css/ionic.min.css"/>
+  <link rel="stylesheet" href="css/manage.css"/>
+  <script src="js/ionic.bundle.min.js"></script>
+  <link href="js/lib/ion-datetime-picker-master/release/ion-datetime-picker.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="favicon.ico"/>
+	<link rel="bookmark" href="favicon.ico"/>
+  <script src="js/lib/ion-datetime-picker-master/release/ion-datetime-picker.min.js"></script>
+    <!-- <script type="text/javascript" src="js/cordova.js"></script> -->
+</head>
+<body ng-controller="parentCtrl">
+<!------------------newWork里的模态框------------------------------>
+<!--模态框-->
+<!--选择项目模态框-->
+<script id="project.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">选择项目</h1>
+      <button class="button button-icon " ng-click="projectModal.hide()">&times;</button>
+    </ion-header-bar>
+    <ion-content>
+      <div class="list">
+        <ion-radio ng-repeat="item in allList.project" ng-model="projectContent.project" ng-value="item.pName">{{item.pName}}</ion-radio>
+      </div>
+      <div class='list list-inset'>
+        <button ng-click="projectModal.hide()" class="button button-block ">确认</button>
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+<!--选择负责人模态框-->
+<script id="principal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">选择负责人</h1>
+      <button class="button button-icon " ng-click="principalModal.hide()">&times;</button>
+    </ion-header-bar>
+    <ion-content>
+      <div class="list">
+        <ion-radio ng-repeat="item in allList.employee" ng-model="projectContent.responsible" ng-value="item.eName">{{item.eName}}</ion-radio>
+      </div>
+      <div class='list list-inset'>
+        <button ng-click="principalModal.hide()" class="button button-block ">确认</button>
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+<!--添加关注人模态框-->
+<script id="attention.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">选择负责人</h1>
+      <button class="button button-icon " ng-click="attentionModal.hide()">&times;</button>
+    </ion-header-bar>
+    <ion-content>
+      <ion-toggle ng-repeat="item in allList.employee" ng-model="projectContent.attention[item.eId]" name="attention" value="{{item.eId}}" toggle-class="toggle-calm">{{item.eName}}</ion-toggle>
+      <div class='list list-inset'>
+        <button ng-click="attentionModal.hide()" class="button button-block ">确认</button>
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+<!--新建任务 模态框页面-->
+<script id="newWork.html" type="text/ng-template">
+  <ion-modal-view>
+    <!--work表头-->
+    <ion-header-bar class="bg_color">
+      <!--左边按钮-->
+      <div class="buttons">
+        <button ng-click="newWorkModal.hide()" class="button button-icon icon ion-arrow-left-c color_fff"></button>
+        <span class="header_border border_fff"></span>
+        <button class="button button-icon color_fff">新建任务</button>
+      </div>
+      <div class="title"></div>
+      <!-- 右边按钮-->
+      <div class="buttons">
+        <button ng-click="saveNewWork()" class="button button-icon color_fff">保存</button>
+      </div>
+    </ion-header-bar>
+
+
+    <!--主体内容-->
+
+    <ion-content>
+      <div class="list">
+        <label class="item item-input">
+          <input ng-model="projectContent.work" ng-value="projectContent.work" type="text" placeholder="请填写任务标题">
+        </label>
+      </div>
+      <div class="list">
+        <!-- 设置项目-->
+        <a ng-click="projectModal.show()" class="item item-icon-left item-icon-right" href="#">
+          <i class="icon ion-ios-filing-outline"></i>
+          {{projectContent.project}}
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+        <!-- 设置负责人-->
+        <a ng-click="principalModal.show()" class="item item-icon-left item-icon-right" href="#">
+          <i class="icon ion-ios-personadd-outline"></i>
+          {{projectContent.responsible}}
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+        <!-- 设置截止时间-->
+        <a ion-datetime-picker ng-model="projectContent.deadLine" class="item item-icon-left item-icon-right" href="#">
+          <i class="icon ion-ios-calendar-outline"></i>
+          {{projectContent.deadLine | date: "yyyy-MM-dd H:mm:ss"}}
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- 添加关注人-->
+      <div class="list">
+        <a ng-click="attentionModal.show()" class="item item-icon-left item-icon-right" href="#">
+          <i class="icon ion-android-star-outline"></i>
+          添加关注人
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </div>
+    </ion-content>
+
+
+  </ion-modal-view>
+
+
+</script>
+
+<!--------------------------------------------------------------->
+
+<!--任务详情模态框-->
+<script id="workDetail.html" type="text/ng-template">
+  <ion-modal-view>
+    <!--work表头-->
+    <ion-header-bar class="bg_color">
+      <!--左边按钮-->
+      <div class="buttons">
+        <button ng-click="workDetail.hide()" class="button button-icon icon ion-arrow-left-c color_fff"></button>
+        <span class="header_border border_fff"></span>
+        <button class="button button-icon color_fff">任务详情</button>
+      </div>
+      <div class="title"></div>
+      <!-- 右边按钮-->
+      <div class="buttons">
+        <button ng-click="" class="button button-icon color_fff">更多</button>
+      </div>
+    </ion-header-bar>
+    <ion-content class="workDetail">
+      <!-- 顶部内容-->
+      <div class="list">
+        <div class="item">
+          <span class="fl">项目：轻应用</span>
+          <span class="fr">1人关注</span>
+        </div>
+      </div>
+
+      <div class="list">
+        <div class="item item-icon-right">
+          <input type="checkbox">
+          <span class="text">模型确认</span>
+          <i class="icon ion-star color_FDB825"></i>
+        </div>
+        <a class="item item-icon-left">
+          <i class="icon ion-person"></i>
+          <span class="text">陈卿&nbsp;负责</span>
+        </a>
+        <a class="item item-icon-left">
+          <i class="icon ion-calendar"></i>
+          <span class="text">下周二到期</span>
+        </a>
+        <a class="item item-icon-left">
+          <i class="icon ion-android-add"></i>
+          <span class="text">添加检查项</span>
+        </a>
+      </div>
+
+
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+
+<!--状态存放的位置-->
+<div ui-view></div>
+
+
+<!--引入尾部-->
+<div ng-include="'tpl/include/footer.html'"></div>
+<script type="text/javascript" src="cordova.js"></script>
+<script src="js/manage.js"></script>
+
+</body>
+</html>

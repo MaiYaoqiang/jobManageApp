@@ -1,0 +1,32 @@
+<!--work表头-->
+<ion-header-bar class="bg_color">
+<!--左边按钮-->
+  <div class="buttons">
+    <button class="button button-icon icon ion-arrow-left-c color_fff"></button>
+
+    <span class="header_border border_fff"></span>
+
+    <button class="button button-icon color_fff">任务</button>
+  </div>
+  <div class="title"></div>
+  <!-- 右边按钮-->
+  <div class="buttons">
+    <button class="button button-icon"><span class="header_circle color_fff border_fff">?</span></button>
+    <button ng-click="newWorkModal.show()" class="button button-icon color_fff">新任务</button>
+  </div>
+
+</ion-header-bar>
+
+
+<ion-content  class="has-footer">
+  <div id="work_nav" class="list">
+    <div class="item">
+      <div class="button-bar mybar_color">
+        <a ng-class="{active:(workState.state=='.responsible')}" ng-click="jump('work.responsible')" class="button title_bar">我负责的</a>
+        <a ng-class="{active:(workState.state=='.sponsor')}" ng-click="jump('work.sponsor')" class="button title_bar ">我发起的</a>
+        <a ng-class="{active:(workState.state=='.attention')}" ng-click="jump('work.attention')" class="button title_bar ">我关注的</a>
+      </div>
+    </div>
+  </div>
+  <div ui-view></div>
+</ion-content>
