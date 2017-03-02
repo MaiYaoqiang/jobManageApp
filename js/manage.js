@@ -72,13 +72,30 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider','$htt
 app.controller('parentCtrl', ['$scope', '$state', '$ionicHistory','$location','$ionicModal','$http','$ionicPopup','$httpParamSerializerJQLike',
   function ($scope, $state, $ionicHistory,$location,$ionicModal,$http,$ionicPopup,$httpParamSerializerJQLike) {
     //设置请求数据库数据源
-    $scope.address='http://localhost/study file/project/jobManageApp/';
+    //$scope.address='http://localhost/study file/project/jobManageApp/';
+    $scope.address='';
 
     //获取员工列表和项目列表
     $scope.allList={
       project:[],
       employee:[]
     };
+
+    //任务详情数据
+    $scope.workDetialMsg={
+      //项目名
+      pName:"",
+      //关注人数
+      attentionCount:'',
+      //任务名
+      wTitle:'',
+      //负责人名
+      responsibleEName:'',
+      //截止日期
+      deadLine:''
+
+    };
+
 
 
     //设置警告框
@@ -144,7 +161,7 @@ app.controller('parentCtrl', ['$scope', '$state', '$ionicHistory','$location','$
           method: 'POST',
           data:content
         }).success(function(data){
-          console.log(data);
+        //  成功回调
         });
       }
     };
@@ -225,11 +242,32 @@ app.controller('parentCtrl', ['$scope', '$state', '$ionicHistory','$location','$
     }).then(function (modal) {
       $scope.workDetail ={
         modal:modal,
-        show:function(title){
-          //获取到wTitle title
+        show:function(wId){
+          event.preventDefault();
+          //获取到wId
           //查询数据库获取详细数据
+          console.log(wId);
+          $http.get($scope.address+'data/getWorkDetialMsg.php?wId='+wId)
+          .success(function(data){
+              console.log(data);
+              //数据格式
+              //任务详情数据
+              //$scope.workDetialMsg={
+              //  //项目名
+              //  pName:"",
+              //  //关注人数
+              //  attentionCount:'',
+              //  //任务名
+              //  wTitle:'',
+              //  //负责人名
+              //  responsibleEName:'',
+              //  //截止日期
+              //  deadLine:''
+              //
+              //};
 
-
+              $scope.workDetialMsg=data;
+            });
           modal.show()
 
         },

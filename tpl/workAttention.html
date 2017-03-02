@@ -1,6 +1,6 @@
 
 <div class="list ">
-  <a ng-repeat="item in workAttentionData" href="" class="item">
+  <a ng-click="workDetail.show(item.wId)" ng-repeat="item in workAttentionData" href="{{item.wId}}" class="item">
     <div class="fr"><img class="my_photo" src="img/1.jpg" alt=""/></div>
     <h2><b>{{item.wTitle}}</b></h2>
     <h3 class="icon_tips">

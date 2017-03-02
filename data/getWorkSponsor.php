@@ -5,9 +5,9 @@
     require('init.php');
 
 //    查询未完成 isComplete=0
-    $sql1="SELECT work.deadLine,work.wTitle,work.isComplete,work.completeTime,project.pName FROM project,work WHERE work.sponsorId=$eId AND work.isComplete=0 AND project.pId=work.pId";
+    $sql1="SELECT work.deadLine,work.wTitle,work.isComplete,work.completeTime,work.wId,project.pName FROM project,work WHERE work.sponsorId=$eId AND work.isComplete=0 AND project.pId=work.pId";
 //    查询已完成 isComplete=1
-    $sql2="SELECT work.deadLine,work.wTitle,work.isComplete,work.completeTime,project.pName FROM project,work WHERE work.sponsorId=$eId AND work.isComplete=1 AND project.pId=work.pId";
+    $sql2="SELECT work.deadLine,work.wTitle,work.isComplete,work.completeTime,work.wId,project.pName FROM project,work WHERE work.sponsorId=$eId AND work.isComplete=1 AND project.pId=work.pId";
 //    接受数据容器
     $list=[];
 //    今天的数据

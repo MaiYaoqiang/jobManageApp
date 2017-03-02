@@ -3,7 +3,7 @@
   <div class="item item-divider-my">
     <b>今天</b>
   </div>
-  <a ng-repeat="item in workResponsibleData[0]" class="item" href="">
+  <a ng-click="workDetail.show(item.wId)" ng-repeat="item in workResponsibleData[0]" class="item" href="{{item.wId}}">
     <h2><b>{{item.wTitle}}</b></h2>
     <h3 class="icon_tips">
       <i class="icon ion-ios-timer-outline">{{item.deadLine | date:'yyyy-MM-dd'}}</i>
@@ -18,7 +18,7 @@
   <div class="item item-divider-my">
     <b>以后</b>
   </div>
-  <a ng-click="workDetail.show(item.wTitle)" ng-repeat="item in workResponsibleData[1]" class="item" href="">
+  <a ng-click="workDetail.show(item.wId)" ng-repeat="item in workResponsibleData[1]" class="item" href="{{item.wId}}">
     <h2><b>{{item.wTitle}}</b></h2>
 
     <h3 class="icon_tips">

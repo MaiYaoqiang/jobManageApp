@@ -7,9 +7,9 @@
     $timeToday=strtotime(date("Y-m-d",time()))*1000;
     $timeTodayEnd=$timeToday+3600*24*1000;
 //    查询今天的数据
-    $sql1="SELECT work.deadLine,work.wTitle,project.pName FROM project,work WHERE work.responsibleId=$eId AND project.pId=work.pId AND work.deadLine>=$timeToday AND work.deadLine<=$timeTodayEnd ORDER BY work.deadLine DESC";
+    $sql1="SELECT work.deadLine,work.wTitle,work.wId,project.pName FROM project,work WHERE work.responsibleId=$eId AND project.pId=work.pId AND work.deadLine>=$timeToday AND work.deadLine<=$timeTodayEnd ORDER BY work.deadLine DESC";
 //    查询以后的数据
-    $sql2="SELECT work.deadLine,work.wTitle,project.pName FROM project,work WHERE work.responsibleId=$eId AND project.pId=work.pId AND work.deadLine>$timeTodayEnd ORDER BY work.deadLine DESC";
+    $sql2="SELECT work.deadLine,work.wTitle,work.wId,project.pName FROM project,work WHERE work.responsibleId=$eId AND project.pId=work.pId AND work.deadLine>$timeTodayEnd ORDER BY work.deadLine DESC";
 //    接受数据容器
     $list=[];
 //    今天的数据
